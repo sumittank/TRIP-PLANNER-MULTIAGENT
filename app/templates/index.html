@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}AI Travel Planner — Home{% endblock %}
+
+{% block content %}
+<section class="hero-section relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-700/30 via-dark-900 to-dark-900"></div>
+    <div class="absolute inset-0 opacity-20" style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1400&q=80'); background-size: cover; background-position: center;"></div>
+    <div class="relative max-w-7xl mx-auto px-4 py-24 sm:py-32 text-center">
+        <span class="inline-block px-4 py-1 rounded-full bg-primary-500/20 border border-primary-500/40 text-primary-400 text-sm font-semibold tracking-wider uppercase mb-6 animate-fade-in">
+            Multi-Agent AI System
+        </span>
+        <h1 class="text-4xl sm:text-6xl font-bold text-white mb-6 animate-slide-up">
+            Plan Your Perfect Trip with <span class="text-primary-400">AI Agents</span>
+        </h1>
+        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10 animate-slide-up typing-text">
+            Supervisor-led agents search flights, hotels, budgets, attractions, and travel tips — then a critic reviews every plan.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
+            <a href="/planner" class="btn-primary text-lg px-8 py-3">Start Planning →</a>
+            <a href="/about" class="btn-secondary text-lg px-8 py-3">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- <section class="max-w-7xl mx-auto px-4 py-16">
+    <h2 class="text-2xl font-bold text-white mb-8 text-center">Popular Destinations</h2>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        {% for dest, img in [("Tokyo", "1540959733332"), ("Paris", "1502602898657"), ("Bangkok", "1508009603885"), ("Rome", "1552832230"), ("Dubai", "1512453979798")] %}
+        <div class="dest-card group cursor-pointer" data-dest="{{ dest }}">
+            <img src="https://images.unsplash.com/photo-{{ img }}-eab4deabeeaf?w=300&q=70" alt="{{ dest }}" class="w-full h-32 object-cover rounded-xl brightness-75 group-hover:brightness-100 transition">
+            <span class="absolute bottom-3 left-0 right-0 text-center text-white font-semibold text-sm">{{ dest }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</section> -->
+<section class="max-w-7xl mx-auto px-4 py-16">
+    <h2 class="text-2xl font-bold text-white mb-8 text-center">Popular Destinations</h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+
+        {% for dest, img in [
+            ("Tokyo", "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=300&q=70"),
+            ("Paris", "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=300&q=70"),
+            ("Bangkok", "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=300&q=70"),
+            ("Rome", "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=300&q=70"),
+            ("Dubai", "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=300&q=70")
+        ] %}
+
+        <div class="dest-card group cursor-pointer relative overflow-hidden rounded-xl" data-dest="{{ dest }}">
+            <img 
+                src="{{ img }}" 
+                alt="{{ dest }}" 
+                class="w-full h-32 object-cover brightness-75 group-hover:brightness-100 transition"
+            >
+
+            <span class="absolute bottom-3 left-0 right-0 text-center text-white font-semibold text-sm">
+                {{ dest }}
+            </span>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-16">
+    <h2 class="text-2xl font-bold text-white mb-8 text-center">Agent Pipeline</h2>
+    <div class="grid md:grid-cols-4 gap-6">
+        {% for icon, title, desc in [
+            ("🎯", "Supervisor", "Routes your request to the right specialist agents"),
+            ("✈️", "Specialists", "Flight, Hotel, Budget, Attraction & Tips agents run in parallel"),
+            ("🔍", "Critic", "Reviews plan quality with confidence scoring"),
+            ("📋", "Formatter", "Delivers structured itinerary with checklists")
+        ] %}
+        <div class="card p-6 text-center">
+            <div class="text-4xl mb-4">{{ icon }}</div>
+            <h3 class="text-lg font-semibold text-white mb-2">{{ title }}</h3>
+            <p class="text-slate-400 text-sm">{{ desc }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-16">
+    <div class="card p-8 grid md:grid-cols-3 gap-8 text-center">
+        <div><div class="text-3xl font-bold text-primary-400" id="stat-trips">—</div><div class="text-slate-400 text-sm mt-1">Trips Planned</div></div>
+        <div><div class="text-3xl font-bold text-primary-400">7</div><div class="text-slate-400 text-sm mt-1">AI Agents</div></div>
+        <div><div class="text-3xl font-bold text-primary-400">LangGraph</div><div class="text-slate-400 text-sm mt-1">Workflow Engine</div></div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.querySelectorAll('.dest-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const dest = card.dataset.dest;
+        window.location.href = `/planner?dest=${encodeURIComponent(dest)}`;
+    });
+});
+(async () => {
+    try {
+        const data = await API.getAnalytics();
+        document.getElementById('stat-trips').textContent = data.total_trips;
+    } catch (e) { /* ignore */ }
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}About — AI Travel{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-white mb-6">About AI Travel Planner</h1>
+
+    <div class="card p-8 mb-8">
+        <p class="text-slate-300 leading-relaxed mb-4">
+            AI Travel Planner is a production-quality multi-agent travel planning platform built with
+            <strong class="text-primary-400">LangGraph</strong>, <strong class="text-primary-400">FastAPI</strong>,
+            and <strong class="text-primary-400">Groq (LLaMA 3.3)</strong>. A supervisor agent routes your request
+            to specialist agents that run in parallel, a critic reviews the plan, and a formatter delivers
+            structured itineraries with checklists.
+        </p>
+    </div>
+
+    <h2 class="text-xl font-bold text-white mb-4">Agent Pipeline</h2>
+    <div class="grid md:grid-cols-2 gap-4 mb-8">
+        {% for icon, name, desc in [
+            ("🎯", "Supervisor Agent", "Analyzes your request and activates only the relevant specialist agents."),
+            ("✈️", "Flight Agent", "Searches live flight data via AviationStack API."),
+            ("🏨", "Hotel Agent", "Finds accommodation options using Tavily search."),
+            ("💰", "Budget Agent", "Estimates trip costs and provides budget breakdowns."),
+            ("🏛️", "Attraction Agent", "Discovers sightseeing, restaurants, and weather info."),
+            ("💡", "Travel Tips Agent", "Provides packing lists, safety tips, and local customs."),
+            ("🔍", "Critic Agent", "Reviews plan quality with confidence scoring and self-correction."),
+            ("📋", "Response Formatter", "Delivers polished markdown plans with structured JSON output.")
+        ] %}
+        <div class="card p-5">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="text-2xl">{{ icon }}</span>
+                <h3 class="font-semibold text-white">{{ name }}</h3>
+            </div>
+            <p class="text-slate-400 text-sm">{{ desc }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2 class="text-xl font-bold text-white mb-4">Tech Stack</h2>
+    <div class="card p-6 mb-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            {% for tech in ["LangGraph", "LangChain", "FastAPI", "Groq LLaMA", "PostgreSQL", "Tavily", "AviationStack", "Tailwind CSS"] %}
+            <div class="suggestion-chip inline-block">{{ tech }}</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <h2 class="text-xl font-bold text-white mb-4">Memory System</h2>
+    <div class="card p-6 mb-8 text-slate-300 text-sm leading-relaxed">
+        <p>Instead of storing every message, the system generates <strong class="text-white">conversation summaries</strong>
+        and learns your preferences over time — preferred airlines, hotel types, travel style, budget history,
+        and previous destinations. This context is injected before each new planning session.</p>
+    </div>
+
+    <div class="text-center">
+        <a href="/planner" class="btn-primary px-8 py-3 text-lg">Start Planning →</a>
+    </div>
+</div>
+{% endblock %}
