@@ -1,0 +1,31 @@
+from app.schemas.travel import (
+    AnalyticsResponse,
+    ChatRequest,
+    ChatResponse,
+    ComparePlansRequest,
+    ErrorResponse,
+    HealthResponse,
+    HistoryResponse,
+    PlanTripRequest,
+    PlanTripResponse,
+    PreferencesResponse,
+    PreferencesUpdate,
+    TripDetail,
+    TripSummary,
+)
+
+__all__ = [
+    "PlanTripRequest",
+    "PlanTripResponse",
+    "ChatRequest",
+    "ChatResponse",
+    "ComparePlansRequest",
+    "PreferencesUpdate",
+    "PreferencesResponse",
+    "TripSummary",
+    "TripDetail",
+    "HistoryResponse",
+    "AnalyticsResponse",
+    "HealthResponse",
+    "ErrorResponse",
+]

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Trip Planner — AI Travel{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-white mb-2">Trip Planner</h1>
+    <p class="text-slate-400 mb-8">Describe your dream trip and let our AI agents build a complete plan.</p>
+
+    <div class="card p-6 mb-6">
+        <label class="block text-sm font-semibold text-primary-400 uppercase tracking-wider mb-2">Your Trip</label>
+        <textarea id="trip-query" rows="4" class="input-field w-full" placeholder="e.g. Plan a complete 7-day Japan trip including flights, hotels and sightseeing under ₹2 lakhs"></textarea>
+
+        <div class="flex flex-wrap gap-2 mt-3" id="quick-suggestions">
+            <button class="suggestion-chip" data-query="7-day Japan trip under ₹2L">7-day Japan under ₹2L</button>
+            <button class="suggestion-chip" data-query="Paris trip for 5 days with hotels">Paris 5 days</button>
+            <button class="suggestion-chip" data-query="Dubai weekend trip with flights">Dubai weekend</button>
+            <button class="suggestion-chip" data-query="Bali backpacking 10 days budget trip">Bali backpacking</button>
+        </div>
+
+        <div class="flex gap-3 mt-4">
+            <input id="user-id" type="text" class="input-field flex-1" placeholder="User ID" value="default_user">
+            <button id="plan-btn" class="btn-primary px-8 py-3 whitespace-nowrap">
+                <span id="plan-btn-text">Generate Plan</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="progress-section" class="hidden card p-6 mb-6">
+        <h3 class="text-lg font-semibold text-white mb-4">Agent Pipeline</h3>
+        <div class="space-y-3" id="agent-status">
+            <div class="agent-step" data-agent="supervisor"><span class="agent-icon">🎯</span> Supervisor Agent <span class="agent-status ml-auto">Waiting</span></div>
+            <div class="agent-step" data-agent="parallel"><span class="agent-icon">⚡</span> Specialist Agents <span class="agent-status ml-auto">Waiting</span></div>
+            <div class="agent-step" data-agent="critic"><span class="agent-icon">🔍</span> Critic Agent <span class="agent-status ml-auto">Waiting</span></div>
+            <div class="agent-step" data-agent="formatter"><span class="agent-icon">📋</span> Response Formatter <span class="agent-status ml-auto">Waiting</span></div>
+        </div>
+        <div class="mt-4 bg-dark-700 rounded-full h-2 overflow-hidden">
+            <div id="progress-bar" class="bg-primary-500 h-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <div id="results-section" class="hidden space-y-6">
+        <div class="grid md:grid-cols-3 gap-4" id="metrics-row"></div>
+        <div id="trip-cards" class="space-y-4"></div>
+        <div class="card p-6" id="final-plan"></div>
+        <div class="flex flex-wrap gap-3" id="action-buttons"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/planner.js"></script>
+{% endblock %}

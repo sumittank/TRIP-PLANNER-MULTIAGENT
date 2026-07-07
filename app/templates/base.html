@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI Travel Planner{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 400: '#4ea8f0', 500: '#3a7bd5', 600: '#1a6bbf', 700: '#0d4a8a' },
+                        dark: { 900: '#080d14', 800: '#0e1623', 700: '#111b2b', 600: '#1e2e44' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-dark-900 text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full z-50 bg-dark-900/90 backdrop-blur-md border-b border-dark-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2 text-xl font-bold text-white">
+                    <span class="text-2xl">✈️</span> TravelAI
+                </a>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/planner" class="nav-link">Trip Planner</a>
+                    <a href="/history-page" class="nav-link">History</a>
+                    <a href="/saved-page" class="nav-link">Saved</a>
+                    <a href="/settings-page" class="nav-link">Settings</a>
+                    <a href="/about" class="nav-link">About</a>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition" aria-label="Toggle theme">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-dark-700">☰</button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-dark-600 bg-dark-800 px-4 py-3 space-y-2">
+            <a href="/" class="block py-2 nav-link">Home</a>
+            <a href="/planner" class="block py-2 nav-link">Trip Planner</a>
+            <a href="/history-page" class="block py-2 nav-link">History</a>
+            <a href="/saved-page" class="block py-2 nav-link">Saved</a>
+            <a href="/settings-page" class="block py-2 nav-link">Settings</a>
+            <a href="/about" class="block py-2 nav-link">About</a>
+        </div>
+    </nav>
+
+    <main class="pt-16">
+        {% block content %}{% endblock %}
+    </main>
+
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+    <div id="modal-overlay" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+        <div id="modal-content" class="bg-dark-800 rounded-2xl border border-dark-600 max-w-2xl w-full max-h-[80vh] overflow-y-auto p-6"></div>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/ui.js"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

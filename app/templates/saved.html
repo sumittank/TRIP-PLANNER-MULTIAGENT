@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Saved Trips — AI Travel{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-white">Saved Trips</h1>
+            <p class="text-slate-400">Your favourite travel plans</p>
+        </div>
+        <input id="saved-user-id" type="text" class="input-field w-48" value="default_user" placeholder="User ID">
+    </div>
+    <div id="saved-list" class="space-y-4">
+        <div class="text-slate-400 text-center py-12">Loading...</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/saved.js"></script>
+{% endblock %}

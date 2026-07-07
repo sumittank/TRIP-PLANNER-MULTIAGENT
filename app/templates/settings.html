@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Settings — AI Travel{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-white mb-2">Settings</h1>
+    <p class="text-slate-400 mb-8">Manage your travel preferences and view analytics.</p>
+
+    <div class="card p-6 mb-8">
+        <label class="block text-sm font-semibold text-primary-400 uppercase tracking-wider mb-2">User ID</label>
+        <input id="settings-user-id" type="text" class="input-field w-full mb-6" value="default_user" placeholder="Your session ID">
+    </div>
+
+    <form id="preferences-form" class="card p-6 mb-8 space-y-5">
+        <h2 class="text-lg font-semibold text-white">Travel Preferences</h2>
+
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Preferred Airline</label>
+            <input id="preferred-airline" type="text" class="input-field w-full" placeholder="e.g. Emirates, IndiGo">
+        </div>
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Favourite Hotel Type</label>
+            <input id="hotel-type" type="text" class="input-field w-full" placeholder="e.g. Boutique, 5-star, Hostel">
+        </div>
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Travel Style</label>
+            <input id="travel-style" type="text" class="input-field w-full" placeholder="e.g. Adventure, Luxury, Budget">
+        </div>
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Budget Range</label>
+            <input id="budget-range" type="text" class="input-field w-full" placeholder="e.g. Under ₹2L, $3000">
+        </div>
+        <div>
+            <label class="block text-sm text-slate-400 mb-1">Previous Destinations (comma-separated)</label>
+            <input id="destinations" type="text" class="input-field w-full" placeholder="e.g. Tokyo, Paris, Dubai">
+        </div>
+
+        <button id="save-prefs-btn" type="submit" class="btn-primary px-6 py-2">
+            <span id="save-prefs-text">Save Preferences</span>
+        </button>
+    </form>
+
+    <div class="card p-6">
+        <h2 class="text-lg font-semibold text-white mb-4">Your Analytics</h2>
+        <div id="analytics-panel">
+            <div class="text-slate-400">Loading analytics...</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/settings.js"></script>
+{% endblock %}
