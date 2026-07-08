@@ -82,8 +82,10 @@ class PlanTripResponse(BaseModel):
     travel_tips_results: str = ""
     itinerary: str = ""
     llm_calls: int = 0
-    packing_checklist: str = ""
-    travel_checklist: str = ""
+    # packing_checklist: str = ""
+    # travel_checklist: str = ""
+    packing_checklist: dict[str, Any] = Field(default_factory=dict)
+    travel_checklist: dict[str, Any] = Field(default_factory=dict)
 
 
 class ChatResponse(BaseModel):
